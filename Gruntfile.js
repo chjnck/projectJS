@@ -4,31 +4,49 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
         jshint: {
-            files: ['src/**/*.js', 'test/**/*.spec.js'],
+            files: [
+                'modules/config/*.js',
+                'modules/create/*.js',
+                'modules/emailView/*.js',
+                'modules/inbox/*.js'
+            ],
             options: {
                 // options here to override JSHint defaults
                 jshintrc: true
             }
         },
         less: {
-          development: {
-              options: {
-                  paths: ["assets/"]
-              },
-              files: {"css/main.css": "less/main.less"}
-          },
-          production: {
-              options: {
-                  paths: ["assets/"]
-              },
-              files: {"css/main.css": "less/main.less"}
-          }
+            development: {
+                options: {
+                    paths: ["assets/less"]
+                },
+                files: {
+                    "assets/css/main.css": "assets/less/main.less"
+                }
+            },
+            production: {
+                options: {
+                    paths: ["assets/less"]
+                },
+                files: {
+                    "assets/css/main.css": "assets/less/main.less"
+                }
+            }
         },
         injector: {
             options: {},
                 local_dependencies: {
                 files: {
-                'index.html': ['**/*.js', '**/*.css']
+                'index.html': [
+                    'assets/js/angular.js',
+                    'assets/js/jquery-2.1.3.min.js',
+                    'assets/js/*.js',
+                    'modules/config/*.js',
+                    'modules/create/*.js',
+                    'modules/emailView/*.js',
+                    'modules/inbox/*.js',
+                    'assets/css/*.css'
+                ]
                 }
             }
         },
@@ -45,5 +63,5 @@ module.exports = function(grunt) {
      grunt.loadNpmTasks('grunt-contrib-watch');  // Simple config to run jshint any time a file is added, changed or deleted
 
 
-     grunt.registerTask('all', ['jshint', 'less', 'injector', 'watch']);
+     grunt.registerTask('all', ['jshint', 'less']);
 };
