@@ -40,6 +40,7 @@ module.exports = function(grunt) {
                 'index.html': [
                     'assets/js/angular.js',
                     'assets/js/jquery-2.1.3.min.js',
+                    'app.*.js',
                     'assets/js/*.js',
                     'modules/config/*.js',
                     'modules/create/*.js',
@@ -63,5 +64,6 @@ module.exports = function(grunt) {
      grunt.loadNpmTasks('grunt-contrib-watch');  // Simple config to run jshint any time a file is added, changed or deleted
 
 
-     grunt.registerTask('all', ['jshint', 'less']);
+     grunt.registerTask('all', ['jshint', 'less', 'injector']);
+     grunt.registerTask('def', ['jshint', 'less']);
 };

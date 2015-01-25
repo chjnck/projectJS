@@ -1,0 +1,32 @@
+/* elements list */
+@pink: #ffedf3;
+@dunkel-pink: #ffa1c0;
+@green: #f3ffed;
+
+.jumbotron .table-responsive .table {
+  .new {
+    background-color: @pink;
+  }
+}
+
+.jumbotron .table-responsive .table tr {
+  cursor: pointer;
+
+  .sender,
+  .title {
+    font-weight: 600;
+  }
+
+  &:hover {
+    background-color: @green;
+  }
+
+  .glyphicon.glyphicon-remove {
+    color: grey;
+    cursor: pointer;
+
+    &:hover {
+      color: @dunkel-pink;
+    }
+  }
+}

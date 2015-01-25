@@ -1,0 +1,21 @@
+/* elements list */
+.jumbotron .table-responsive .table .new {
+  background-color: #ffedf3;
+}
+.jumbotron .table-responsive .table tr {
+  cursor: pointer;
+}
+.jumbotron .table-responsive .table tr .sender,
+.jumbotron .table-responsive .table tr .title {
+  font-weight: 600;
+}
+.jumbotron .table-responsive .table tr:hover {
+  background-color: #f3ffed;
+}
+.jumbotron .table-responsive .table tr .glyphicon.glyphicon-remove {
+  color: grey;
+  cursor: pointer;
+}
+.jumbotron .table-responsive .table tr .glyphicon.glyphicon-remove:hover {
+  color: #ffa1c0;
+}
