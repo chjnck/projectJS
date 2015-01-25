@@ -3,30 +3,34 @@
 @dunkel-pink: #ffa1c0;
 @green: #f3ffed;
 
+.container .jumbotron {
+  padding: 2rem;
+}
+
 .jumbotron .table-responsive .table {
   .new {
     background-color: @pink;
   }
-}
 
-.jumbotron .table-responsive .table tr {
-  cursor: pointer;
-
-  .sender,
-  .title {
-    font-weight: 600;
-  }
-
-  &:hover {
-    background-color: @green;
-  }
-
-  .glyphicon.glyphicon-remove {
-    color: grey;
+  tr {
     cursor: pointer;
 
+    .sender,
+    .title {
+      font-weight: 600;
+    }
+
     &:hover {
-      color: @dunkel-pink;
+      background-color: @green;
+    }
+
+    .glyphicon.glyphicon-remove {
+      color: grey;
+      cursor: pointer;
+
+      &:hover {
+        color: @dunkel-pink;
+      }
     }
   }
 }

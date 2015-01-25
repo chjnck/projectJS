@@ -1,4 +1,7 @@
 /* elements list */
+.container .jumbotron {
+  padding: 2rem;
+}
 .jumbotron .table-responsive .table .new {
   background-color: #ffedf3;
 }
