@@ -1,3 +1,3 @@
 //angular.module('folder', []);
 //angular.module('inbox', ['folder']);
-angular.module('app', ['ui.router', 'ui.bootstrap', 'ui.grid', 'LocalStorageModule']);
+angular.module('app', ['ui.router', 'ui.bootstrap', 'LocalStorageModule']);
