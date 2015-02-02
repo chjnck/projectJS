@@ -2,69 +2,77 @@ angular.module('app')
     .controller('emailsCtrl', ['$scope', '$rootScope', 'localStorageService', 'emails', function ($scope, $rootScope, localStorageService, emails) {
         var emailsList = []; // list of emails from request
 
+        $scope.emails = localStorageService.get('localEmails'); // check if local storage has emails
+
+        if ($scope.emails === null) { // local storage has no emails
+            console.log('http required');
+            emails.getEmails().then(function(response){ // get emails
+                $scope.emails = reverse(response); // save emails to scope
+                emailsList = response;
+                localStorageService.add('localEmails',$scope.emails); // save emails to localstorage
+            });
+        } else { //local storage has emails
+            console.log('On local storage. Nothing do be done.');
+        }
+
+        // reverse emails; the first email is the newest
         var reverse = function(items) {
             return items.slice().reverse();
         };
 
-       /* var localStorage = function() {
-            $scope.emails = localStorageService.get('localEmails');
-            $scope.source = 'Local';
-            if ($scope.emails === null) {
-                console.log('http required');
-                emails.getEmails().then(function(response){
-                    $scope.emails = reverse(response);
-                    emailsList = response;
-                    localStorageService.add('localEmails',$scope.emails);
-                    $scope.source = 'Online';
-                });
-            } else {
-                console.log('On local storage. Nothing do be done.');
-            }
-        }; */
-
         var load = function() {
-            $scope.emails = localStorageService.get('localEmails');
+            // $scope.emails = localStorageService.get('localEmails');
             emails.getEmails().then(function(response) {
-                    emailsList = response;
-                    var newLength = emailsList.length;
-                    var oldLength = $scope.emails.length;
-                    if (newLength > oldLength) { // check new emails
-                        var diff = newLength - oldLength; // amount of new emails
-                        for(var i=1; i<=diff; i++) { // for more new emails
-                            addEmail(emailsList[newLength-i],diff);
-                        }
+                emailsList = response;
+                var newLength = emailsList.length;
+                var oldLength = $scope.emails.length;
+                if (newLength > oldLength) { // check new emails
+                    var diff = newLength - oldLength; // amount of new emails
+                    for(var i=1; i<=diff; i++) { // for more new emails
+                        addEmail(emailsList[newLength-i]);
                     }
+                }
             });
         };
 
-        var addEmail = function(elem, times) {
+        var addEmail = function(elem) {
             $scope.emails.unshift(elem); // add to the beginning of an array
             console.log('new email added');
-            console.log($scope.emails[0].sender);
             localStorageService.add('localEmails', $scope.emails);
         };
+
+
+        var getScope = function(id){
+            for(var i=0; i<$scope.emails.length; i++) {
+                var s = $scope.emails[i].id;
+                if(s === id) {
+                    return i;
+                }
+            }
+        };
+
+        $scope.removeEmail = function(id) {
+            emails.deleteEmails(id).then(function(response) {
+                console.log(response);
+            });
+            var nr = getScope(id);
+            $scope.emails.splice(nr,1);
+            localStorageService.add('localEmails',$scope.emails);
+        };
+
+
+        $scope.updateStorage = function(id) {
+            var nr = getScope(id);
+            $scope.emails[nr].read = 'true';
+            localStorageService.add('localEmails', $scope.emails);
+        };
+
 
         $scope.showEmail = function() {
             console.log('show email');
         };
 
-        $scope.removeEmail = function() {
-            console.log('email removed');
-           // $scope.items.splice($scope.items.indexOf(item),1);
-           // $scope.emails.splice(index,1);
-
-        };
-
-        $scope.updateStorage = function(input) {
-            for(var i=0; i<$scope.emails.length; i++) {
-                if(input === $scope.emails[i].id) {
-                    $scope.emails[i].read = 'true';
-                    localStorageService.add('localEmails', $scope.emails);
-                }
-            }
-        };
-
         //localStorage(); // load data from localStorage at first
-        setInterval(load,5000); // every 5 sec
+        setInterval(load,7000); // every 7 sec
 
     }]);
