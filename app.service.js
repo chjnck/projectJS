@@ -1,6 +1,7 @@
 angular.module('app')
     .factory('emails', ['$http', function ($http) {
         var emails = [];
+
         return {
             getEmails: function () {
                 return $http.get('/emails').then(function (response) {

@@ -11,4 +11,8 @@ angular.module('app')
             $rootScope.$broadcast('removeEmail');
             $state.go('inbox');
         };
+
+        $scope.back = function() {
+            $state.go('inbox');
+        };
 }]);

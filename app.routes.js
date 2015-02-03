@@ -37,27 +37,12 @@ angular.module('app')
             templateUrl: 'modules/config/config.html'
         });
 
-      /*  var populateStates = function () {
-            state.getStates().then(function(response){
-                angular.forEach(response, function(item) {
-                    $stateProvider.state(item[0], item[1]);
-                });
-            });
-        };
+    })
+    .run(function($rootScope, localStorageService, router){
 
-       /*
-       .factory('state', ['$http', function ($http) {
-       var states = ['inbox.folder', {
-       url: '/inbox/folder',
-       templateUrl: 'modules/create/email.html'
-       }];
-
-       return {
-       getStates: function () {
-       return states;
-       }
-       }
-       }]);
-       */
+        var localStorageStates = localStorageService.get('localFolders');
+        if (localStorageStates !== null) {
+            router.setRoutes(localStorageStates);
+        }
 
     });

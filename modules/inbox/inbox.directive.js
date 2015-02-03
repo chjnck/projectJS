@@ -1,5 +1,5 @@
 angular.module('app')
-    .directive('list', function(){
+    .directive('list', function($rootScope){
         return {
             restrict: 'A',
             link: function(scope, element, attrs){
@@ -20,11 +20,11 @@ angular.module('app')
                     for(var nr=0; nr<data.length; nr++) {
                         var cont = shortContent(data,nr);
                         if (data[nr].read === false) {
-                            element.append('<tr class="new" id="' + data[nr].id + '"><td><span class="sender">' + data[nr].sender + '</span></td> + ' +
+                            element.append('<tr draggable="true" class="new" id="' + data[nr].id + '"><td><span class="sender">' + data[nr].sender + '</span></td> + ' +
                             '<td><span class="title">' +  data[nr].title + '</span></td><td><span class="content">' + cont  + '</span></td> + ' +
                             '<td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td></tr>');
                         } else {
-                            element.append('<tr id="' + data[nr].id + '"><td><span class="sender">' + data[nr].sender + '</span></td> + ' +
+                            element.append('<tr draggable="true" id="' + data[nr].id + '"><td><span class="sender">' + data[nr].sender + '</span></td> + ' +
                             '<td><span class="title">' +  data[nr].title + '</span></td><td><span class="content">' + cont  + '</span></td> + ' +
                             '<td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td></tr>');
                         }
@@ -32,13 +32,15 @@ angular.module('app')
                 };
 
                 // add new email
-                var addEmail = function() {
-                    var cont = shortContent(scope.emails,0);
-                    // add new(the first) email at the top of the list
-                    element.prepend('<tr class="new" id="' + scope.emails[0].id + '"><td><span class="sender">' + scope.emails[0].sender + '</span></td> + ' +
-                    '<td><span class="title">' +  scope.emails[0].title + '</span></td><td><span class="content">' + cont  + '</span></td> + ' +
-                    '<td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td></tr>');
-                    console.log('directive: new email added');
+                var addEmail = function(size) {
+                    for (var i=0; i<size; i++) {
+                        var cont = shortContent(scope.emails,i);
+                        // add new(the first) email at the top of the list
+                        element.prepend('<tr draggable="true" class="new" id="' + scope.emails[i].id + '"><td><span class="sender">' + scope.emails[i].sender + '</span></td> + ' +
+                        '<td><span class="title">' +  scope.emails[i].title + '</span></td><td><span class="content">' + cont  + '</span></td> + ' +
+                        '<td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td></tr>');
+                        console.log('directive: new email added');
+                    }
                 };
 
                 var removeEmail = function(mail) {
@@ -46,26 +48,28 @@ angular.module('app')
                     len = len - 1;
                 };
 
+
                 // watch changes
                 scope.$watch('emails', function(value) {
                     console.log('zmienilo sie cos yeah!');
                     if(scope.emails !== undefined) {
-                        if(scope.emails.length > len ) {
-                            var diff = scope.emails.length - len;
-                            if ( diff === 1 ) {
-                                addEmail();
-                                len = scope.emails.length;
-                            }
-                            else if ( diff > 10) {
+                        if (scope.emails.length > len) {
+                            if (len === 0) {
                                 // the first time from localstorage
                                 loadEmails(scope.emails);
                                 console.log('from localstorage');
+                                len = scope.emails.length;
+                            } else {
+                                // add to the list
+                                var diff = scope.emails.length - len;
+                                addEmail(diff);
                                 len = scope.emails.length;
                             }
                         }
                     }
                 }, true);
 
+                // if element is clicked
                 element.bind('click',function(event){
                     // if removed is clicked
                     if (event.target.classList.contains("glyphicon-remove")) {
@@ -88,7 +92,6 @@ angular.module('app')
                     scope.showEmail(idToSend);
                 });
 
-                // closest jQuery function doesn't work :(
                 var closest = function(elem, selector) {
                     var matchesSelector = elem.matches || elem.webkitMatchesSelector || elem.mozMatchesSelector || elem.msMatchesSelector;
                     while (elem) {
@@ -100,6 +103,29 @@ angular.module('app')
                     }
                     return false;
                 };
+
+                // drag and drop
+               /* element.bind("dragstart", function(e) {
+                    var id = e.srcElement.id;
+                    e.dataTransfer.setData('text', id);
+                    console.log(e);
+                    $rootScope.$emit("DRAG-START");
+                });
+
+                element.bind("dragenter", function(e) {
+                    //this.classList.add('over');
+                });
+
+                element.bind("dragleave", function(e) {
+                    //this.classList.remove('over');
+                });
+
+                element.bind("dragend", function(e) {
+                    console.log(e);
+                    $rootScope.$emit("DRAG-END");
+                });
+                */
+
             }
         };
     });

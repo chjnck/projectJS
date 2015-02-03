@@ -1,19 +1,22 @@
 angular.module('app')
-    .controller('mainCtrl', function ($scope, $modal, $log) {
+    .controller('mainCtrl', function ($scope, $modal, $log, router, localStorageService) {
 
-       // $scope.allFolders = localStorageService.get('folders');
-
+        var folders = localStorageService.get('localFolders');
+        var newStates = {};
         $scope.allFolders = [];
-       /* $scope.states = ['inbox.folder', {
-            url: '/inbox/folder',
-            templateUrl: 'modules/create/email.html'
-        }];
 
-        var populateStates = function () {
-            angular.forEach($scope.states, function(item) {
-                $stateProvider.state(item[0], item[1]);
-            });
-        };*/
+        if (folders !== null) {
+            newStates = folders;
+            console.log(newStates);
+            for (var name in folders) {
+                $scope.allFolders.push(name);
+                console.log('add new state! ' + name);
+            }
+        }
+
+        $scope.reload = function (collection) {
+            router.setRoutes(collection);
+        };
 
         $scope.addNewFolder = function () {
             var modalInstance = $modal.open({
@@ -22,9 +25,15 @@ angular.module('app')
             });
 
             modalInstance.result.then(function (folder) {
+
                 $scope.folder = folder;
-                console.log($scope.folder);
                 $scope.allFolders.push($scope.folder);
+                newStates[$scope.folder] = {
+                    "url": "/index/" + $scope.folder,
+                    "templateUrl": "modules/inbox/customFolder.html"};
+                $scope.reload(newStates);
+                localStorageService.add('localFolders',newStates);
+
             }, function () {
                 $log.info('Modal dismissed');
             });

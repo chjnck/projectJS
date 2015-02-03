@@ -84,7 +84,6 @@ angular.module('app')
             $scope.removeEmail($scope.emailToShow);
         });
 
-        //localStorage(); // load data from localStorage at first
         setInterval(load,7000); // every 7 sec
 
     }]);
