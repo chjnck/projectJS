@@ -19,12 +19,12 @@ angular.module('app')
                 var loadEmails = function(data) {
                     for(var nr=0; nr<data.length; nr++) {
                         var cont = shortContent(data,nr);
-                        if (data[nr].read === 'false') {
+                        if (data[nr].read === false) {
                             element.append('<tr class="new" id="' + data[nr].id + '"><td><span class="sender">' + data[nr].sender + '</span></td> + ' +
                             '<td><span class="title">' +  data[nr].title + '</span></td><td><span class="content">' + cont  + '</span></td> + ' +
                             '<td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td></tr>');
                         } else {
-                            element.append('<tr class="new" id="' + data[nr].id + '"><td><span class="sender">' + data[nr].sender + '</span></td> + ' +
+                            element.append('<tr id="' + data[nr].id + '"><td><span class="sender">' + data[nr].sender + '</span></td> + ' +
                             '<td><span class="title">' +  data[nr].title + '</span></td><td><span class="content">' + cont  + '</span></td> + ' +
                             '<td><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td></tr>');
                         }
@@ -66,7 +66,6 @@ angular.module('app')
                     }
                 }, true);
 
-
                 element.bind('click',function(event){
                     // if removed is clicked
                     if (event.target.classList.contains("glyphicon-remove")) {
@@ -76,9 +75,31 @@ angular.module('app')
                         removeEmail(emailToRemove);
                     }
 
-                   // var td = $(event.target).closest('td');
-                    // console.log(td);
+                    // emails is clicked
+                    var tr = closest(event.target, 'tr');
+                    var idToSend = tr.getAttribute('id');
+                    console.log(tr);
+
+                    if(tr.classList.contains('new')){
+                        tr.classList.remove('new');
+                    }
+
+                    scope.updateStorage(idToSend);
+                    scope.showEmail(idToSend);
                 });
+
+                // closest jQuery function doesn't work :(
+                var closest = function(elem, selector) {
+                    var matchesSelector = elem.matches || elem.webkitMatchesSelector || elem.mozMatchesSelector || elem.msMatchesSelector;
+                    while (elem) {
+                        if (matchesSelector.bind(elem)(selector)) {
+                            return elem;
+                        } else {
+                            elem = elem.parentElement;
+                        }
+                    }
+                    return false;
+                };
             }
         };
     });

@@ -63,14 +63,26 @@ angular.module('app')
 
         $scope.updateStorage = function(id) {
             var nr = getScope(id);
-            $scope.emails[nr].read = 'true';
-            localStorageService.add('localEmails', $scope.emails);
+            if ($scope.emails[nr].read === false){
+                $scope.emails[nr].read = true;
+                localStorageService.add('localEmails', $scope.emails);
+            }
+
+            var json = { read: true };
+            emails.update(id,json).then(function(response) {
+            });
         };
 
-
-        $scope.showEmail = function() {
+        $scope.showEmail = function(id) {
             console.log('show email');
+            $scope.emailToShow = id;
+            $scope.go(id);
+            $rootScope.$broadcast('emailId',id);
         };
+
+        $rootScope.$on('removeEmail', function(){
+            $scope.removeEmail($scope.emailToShow);
+        });
 
         //localStorage(); // load data from localStorage at first
         setInterval(load,7000); // every 7 sec
