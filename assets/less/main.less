@@ -3,30 +3,48 @@
 @dunkel-pink: #ffa1c0;
 @green: #f3ffed;
 
-.container .jumbotron {
-  padding: 2rem;
-}
+.container {
 
-.jumbotron .table-responsive .table {
-  .new {
-    background-color: @pink;
+  .jumbotron {
+    padding: 2rem;
+
+    .table-responsive .table {
+      .new {
+        background-color: @pink;
+      }
+
+      tr {
+        cursor: pointer;
+
+        .sender,
+        .title {
+          font-weight: 600;
+        }
+
+        &:hover {
+          background-color: @green;
+        }
+
+        .glyphicon.glyphicon-remove {
+          color: grey;
+          cursor: pointer;
+
+          &:hover {
+            color: @dunkel-pink;
+          }
+        }
+      }
+    }
   }
 
-  tr {
-    cursor: pointer;
-
-    .sender,
-    .title {
-      font-weight: 600;
+  .list-group {
+    .bigger {
+      font-weight: 700;
     }
-
-    &:hover {
-      background-color: @green;
-    }
-
-    .glyphicon.glyphicon-remove {
-      color: grey;
+    .glyphicon {
+      float: right;
       cursor: pointer;
+      padding-left: 2rem;
 
       &:hover {
         color: @dunkel-pink;

@@ -5,10 +5,15 @@ angular.module('app')
     $urlRouterProvider.otherwise('/inbox');
 
     $stateProvider
-
         .state('inbox', {
             url: '/inbox',
-            templateUrl: 'modules/inbox/inbox.html'
+            templateUrl: 'modules/inbox/inbox.html',
+            controller: function($scope, $state, $stateParams) {
+                $scope.params = $stateParams;
+                $scope.go = function (id) {
+                    $state.go('view', {emailId: id});
+                };
+            }
         })
 
         .state('create', {
@@ -17,8 +22,14 @@ angular.module('app')
         })
 
         .state('view', {
-            url: '/view/:emailId',
-            templateUrl: 'modules/emailView/view.html'
+            url: '/view/{emailId}',
+            params: {
+                emailId: null
+            },
+            templateUrl: 'modules/emailView/emailView.html',
+            controller: function($scope, $stateParams) {
+                $scope.id = $stateParams.emailId;
+            }
         })
 
         .state('config', {
@@ -26,4 +37,12 @@ angular.module('app')
             templateUrl: 'modules/config/config.html'
         });
 
-});
+    })
+    .run(function($rootScope, localStorageService, router){
+
+        var localStorageStates = localStorageService.get('localFolders');
+        if (localStorageStates !== null) {
+            router.setRoutes(localStorageStates);
+        }
+
+    });

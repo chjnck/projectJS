@@ -40,7 +40,8 @@ module.exports = function(grunt) {
                 'index.html': [
                     'assets/js/angular.js',
                     'assets/js/jquery-2.1.3.min.js',
-                    'app.*.js',
+                    'app.[m, r , s, p]*.js',
+                    'app.c*.js',
                     'assets/js/*.js',
                     'modules/config/*.js',
                     'modules/create/*.js',

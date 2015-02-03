@@ -2,23 +2,34 @@
 .container .jumbotron {
   padding: 2rem;
 }
-.jumbotron .table-responsive .table .new {
+.container .jumbotron .table-responsive .table .new {
   background-color: #ffedf3;
 }
-.jumbotron .table-responsive .table tr {
+.container .jumbotron .table-responsive .table tr {
   cursor: pointer;
 }
-.jumbotron .table-responsive .table tr .sender,
-.jumbotron .table-responsive .table tr .title {
+.container .jumbotron .table-responsive .table tr .sender,
+.container .jumbotron .table-responsive .table tr .title {
   font-weight: 600;
 }
-.jumbotron .table-responsive .table tr:hover {
+.container .jumbotron .table-responsive .table tr:hover {
   background-color: #f3ffed;
 }
-.jumbotron .table-responsive .table tr .glyphicon.glyphicon-remove {
+.container .jumbotron .table-responsive .table tr .glyphicon.glyphicon-remove {
   color: grey;
   cursor: pointer;
 }
-.jumbotron .table-responsive .table tr .glyphicon.glyphicon-remove:hover {
+.container .jumbotron .table-responsive .table tr .glyphicon.glyphicon-remove:hover {
+  color: #ffa1c0;
+}
+.container .list-group .bigger {
+  font-weight: 700;
+}
+.container .list-group .glyphicon {
+  float: right;
+  cursor: pointer;
+  padding-left: 2rem;
+}
+.container .list-group .glyphicon:hover {
   color: #ffa1c0;
 }
