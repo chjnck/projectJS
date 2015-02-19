@@ -40,13 +40,16 @@ module.exports = function(grunt) {
                 'index.html': [
                     'assets/js/angular.js',
                     'assets/js/jquery-2.1.3.min.js',
-                    'app.[m, r , s, p]*.js',
+                    'app.[m, r , p]*.js',
+                    'app.f*.js',
                     'app.c*.js',
+                    'app.d*.js',
                     'assets/js/*.js',
                     'modules/config/*.js',
                     'modules/create/*.js',
                     'modules/emailView/*.js',
                     'modules/inbox/*.js',
+                    'modules/inbox/customFolder/*.js',
                     'assets/css/*.css'
                 ]
                 }

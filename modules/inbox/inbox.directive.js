@@ -105,26 +105,23 @@ angular.module('app')
                 };
 
                 // drag and drop
-               /* element.bind("dragstart", function(e) {
+
+                var elementDragged = null;
+                element.bind("dragstart", function(e) {
                     var id = e.srcElement.id;
+                    console.log('id: ' + id);
+
+                    e.dataTransfer.effectAllowed = 'move';
                     e.dataTransfer.setData('text', id);
-                    console.log(e);
-                    $rootScope.$emit("DRAG-START");
-                });
 
-                element.bind("dragenter", function(e) {
-                    //this.classList.add('over');
-                });
+                    return false;
 
-                element.bind("dragleave", function(e) {
-                    //this.classList.remove('over');
                 });
 
                 element.bind("dragend", function(e) {
-                    console.log(e);
-                    $rootScope.$emit("DRAG-END");
+                    elementDragged = null;
+                    return false;
                 });
-                */
 
             }
         };

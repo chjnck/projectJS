@@ -1,8 +1,9 @@
 angular.module('app')
-    .controller('mainCtrl', function ($scope, $modal, $log, router, localStorageService) {
+    .controller('mainCtrl', function ($scope, $modal, $log, $rootScope, router, localStorageService, customFolders) {
 
         var folders = localStorageService.get('localFolders');
         var newStates = {};
+        var emailsInFolders = [];
         $scope.allFolders = [];
 
         if (folders !== null) {
@@ -32,12 +33,21 @@ angular.module('app')
                     "url": "/index/" + $scope.folder,
                     "templateUrl": "modules/inbox/customFolder.html"};
                 $scope.reload(newStates);
-                localStorageService.add('localFolders',newStates);
+                localStorageService.add('localFolders', newStates);
 
             }, function () {
                 $log.info('Modal dismissed');
             });
-        }
+        };
+
+        $scope.$on('factoryCustomFolder',function(event,args){
+            var id = args.id;
+            var folderName = args.folder;
+            customFolders.addFolders(id, folderName);
+
+            // localStorageService.add('localFoldersEmails', xxx);
+        });
+
     })
     .controller('ModalInstanceCtrl', function($scope, $modalInstance) {
 
