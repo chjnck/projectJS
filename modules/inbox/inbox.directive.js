@@ -56,7 +56,7 @@ angular.module('app')
                 // watch changes
                 scope.$watch('emails', function(value) {
                     console.log('zmienilo sie cos yeah!');
-                    if(scope.emails != undefined) {
+                    if(scope.emails !== undefined) {
                         if (scope.emails.length > len) {
                             if (len === 0) {
                                 // the first time from localstorage
