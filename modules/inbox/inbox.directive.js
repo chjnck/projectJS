@@ -9,7 +9,11 @@ angular.module('app')
                 // short content to show on the main page
                 var shortContent = function(data,nr) {
                     var shortContent = [];
-                    for(var i = 0; i<25; i++) {
+                    var charCounter = 25;
+                    if (charCounter > data[nr].content.length) {
+                        charCounter = data[nr].content.length;
+                    }
+                    for(var i = 0; i<charCounter; i++) {
                         shortContent += data[nr].content[i];
                     }
                     return shortContent;
