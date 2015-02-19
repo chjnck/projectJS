@@ -1,15 +1,17 @@
 angular.module('app')
-    .controller('customList', ['$scope', '$state', 'customFolders', 'emails',
-        function ($scope, $state, customFolders, emails) {
+    .controller('customList', ['$scope', '$state', 'customFolders', 'emails', 'localStorageService',
+        function ($scope, $state, customFolders, emails, localStorageService) {
 
-        var currentState = $state.current.name;
-        var getEmails = customFolders.getFolders(currentState);
+            var currentState = $state.current.name;
+            var getEmailsId = customFolders.getFolders(currentState);
+            var emailsList = [];
 
-        for(var i=0; i<getEmails.length; i++) {
-            emails.getOneEmail(getEmails[i]).then(function(response){
-                $scope.emails = response;
-                console.log($scope.emails);
-            });
-        }
+            for(var i=0; i<getEmailsId.length; i++) {
+                emails.getOneEmail(getEmailsId[i]).then(function(response){
+                    $scope.emails = response;
+                    emailsList.push(response);
+                    console.log(emailsList);
+                });
+            }
 
     }]);

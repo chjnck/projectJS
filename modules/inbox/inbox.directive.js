@@ -1,5 +1,5 @@
 angular.module('app')
-    .directive('list', function($rootScope){
+    .directive('list', function(){
         return {
             restrict: 'A',
             link: function(scope, element, attrs){
@@ -52,7 +52,7 @@ angular.module('app')
                 // watch changes
                 scope.$watch('emails', function(value) {
                     console.log('zmienilo sie cos yeah!');
-                    if(scope.emails !== undefined) {
+                    if(scope.emails != undefined) {
                         if (scope.emails.length > len) {
                             if (len === 0) {
                                 // the first time from localstorage
@@ -105,8 +105,6 @@ angular.module('app')
                 };
 
                 // drag and drop
-
-                var elementDragged = null;
                 element.bind("dragstart", function(e) {
                     var id = e.srcElement.id;
                     console.log('id: ' + id);
@@ -119,7 +117,6 @@ angular.module('app')
                 });
 
                 element.bind("dragend", function(e) {
-                    elementDragged = null;
                     return false;
                 });
 
