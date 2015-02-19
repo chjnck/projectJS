@@ -8,7 +8,9 @@ module.exports = function(grunt) {
                 'modules/config/*.js',
                 'modules/create/*.js',
                 'modules/emailView/*.js',
-                'modules/inbox/*.js'
+                'modules/inbox/*.js',
+                'modules/sent/*.js',
+                'modules/sentView/*.js'
             ],
             options: {
                 // options here to override JSHint defaults
@@ -50,6 +52,8 @@ module.exports = function(grunt) {
                     'modules/emailView/*.js',
                     'modules/inbox/*.js',
                     'modules/inbox/customFolder/*.js',
+                    'modules/sent/*.js',
+                    'modules/sentView/*.js',
                     'assets/css/*.css'
                 ]
                 }

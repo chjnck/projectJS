@@ -32,6 +32,28 @@ angular.module('app')
             }
         })
 
+        .state('sent', {
+            url: '/sent',
+            templateUrl: 'modules/sent/sent.html',
+            controller: function($scope, $state, $stateParams) {
+                $scope.params = $stateParams;
+                $scope.go = function (id) {
+                    $state.go('sentView', {sentId: id});
+                };
+            }
+        })
+
+        .state('sentView', {
+            url: '/sent/{sentId}',
+            params: {
+                sentId: null
+            },
+            templateUrl: 'modules/sentView/sentView.html',
+            controller: function($scope, $stateParams) {
+                $scope.id = $stateParams.sentId;
+            }
+        })
+
         .state('config', {
             url: '/config',
             templateUrl: 'modules/config/config.html'
