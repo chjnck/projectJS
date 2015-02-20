@@ -5,6 +5,16 @@ angular.module('app')
         var newStates = {};
         var emailsInFolders = [];
         $scope.allFolders = [];
+        $rootScope.data = {
+            theme: ''
+        };
+
+        if (localStorageService.isSupported) {
+            $rootScope.data.theme = localStorageService.get('theme');
+        }
+        else {
+            $scope.theme = 'bootstrap';
+        }
 
         if (folders !== null) {
             newStates = folders;
