@@ -52,7 +52,6 @@ angular.module('app')
                     len = len - 1;
                 };
 
-
                 // watch changes
                 scope.$watch('emails', function(value) {
                     console.log('zmienilo sie cos yeah!');

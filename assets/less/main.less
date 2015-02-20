@@ -37,6 +37,104 @@
     }
   }
 
+  .sendotron {
+    padding: 2rem;
+
+    .rounded(@radius : 5px) {
+      -webkit-border-radius: @radius;
+      -moz-border-radius: @radius;
+      border-radius: @radius;
+    }
+
+    body {
+      font-family: 'Lucida Grande', Arial, sans-serif;
+      font-size: 13px;
+      line-height: 20px;
+    }
+
+    input, textarea {
+      border: 1px solid transparent;
+      background: #eee;
+      color: #333;
+      outline: none;
+      .rounded(3px);
+      font-size: 13px;
+      line-height: 20px;
+    }
+
+    .error {
+      float: left;
+      margin: 20px 10px;
+      color: maroon;
+    }
+
+    form.ng-submitted .ng-invalid {
+      border-color: red;
+      border-width: 2px;
+    }
+
+    .left-label {
+      position: relative;
+      label, .fake-label {
+        float: left;
+        clear: left;
+        margin: 20px 0;
+        width: 120px;
+      }
+      input, textarea {
+        float: left;
+        display:block;
+        margin: 14px 0 0;
+        padding: 4px 3px 4px;
+        line-height: 20px;
+      }
+      input[type=button], input[type=submit] {
+        clear: left;
+        margin: 20px 0 0 120px;
+        padding: 4px 10px 4px 9px;
+      }
+    }
+
+    .top-label {
+      position: relative;
+      float: right;
+      bottom: 10px;
+      label, .fake-label {
+        display: block;
+        margin: 28px 0 2px;
+      }
+      label:after {
+        content: " :";
+      }
+      input {
+        display:block;
+        line-height: 20px;
+        padding: 4px 3px 4px;
+      }
+      input[type=button], input[type=submit] {
+        margin: 20px 0 0;
+        padding: 4px 10px 4px 9px;
+      }
+    }
+
+    .receivers {
+      .receivers-table .table {
+
+        tr {
+          cursor: pointer;
+
+          .sender{
+            font-weight: 600;
+          }
+
+          &:hover {
+            background-color: @dunkel-pink;
+          }
+        }
+      }
+    }
+  }
+
   .list-group {
     .bigger {
       font-weight: 700;

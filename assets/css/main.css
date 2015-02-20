@@ -22,6 +22,91 @@
 .container .jumbotron .table-responsive .table tr .glyphicon.glyphicon-remove:hover {
   color: #ffa1c0;
 }
+.container .sendotron {
+  padding: 2rem;
+}
+.container .sendotron body {
+  font-family: 'Lucida Grande', Arial, sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+}
+.container .sendotron input,
+.container .sendotron textarea {
+  border: 1px solid transparent;
+  background: #eee;
+  color: #333;
+  outline: none;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 13px;
+  line-height: 20px;
+}
+.container .sendotron .error {
+  float: left;
+  margin: 20px 10px;
+  color: maroon;
+}
+.container .sendotron form.ng-submitted .ng-invalid {
+  border-color: red;
+  border-width: 2px;
+}
+.container .sendotron .left-label {
+  position: relative;
+}
+.container .sendotron .left-label label,
+.container .sendotron .left-label .fake-label {
+  float: left;
+  clear: left;
+  margin: 20px 0;
+  width: 120px;
+}
+.container .sendotron .left-label input,
+.container .sendotron .left-label textarea {
+  float: left;
+  display: block;
+  margin: 14px 0 0;
+  padding: 4px 3px 4px;
+  line-height: 20px;
+}
+.container .sendotron .left-label input[type=button],
+.container .sendotron .left-label input[type=submit] {
+  clear: left;
+  margin: 20px 0 0 120px;
+  padding: 4px 10px 4px 9px;
+}
+.container .sendotron .top-label {
+  position: relative;
+  float: right;
+  bottom: 10px;
+}
+.container .sendotron .top-label label,
+.container .sendotron .top-label .fake-label {
+  display: block;
+  margin: 28px 0 2px;
+}
+.container .sendotron .top-label label:after {
+  content: " :";
+}
+.container .sendotron .top-label input {
+  display: block;
+  line-height: 20px;
+  padding: 4px 3px 4px;
+}
+.container .sendotron .top-label input[type=button],
+.container .sendotron .top-label input[type=submit] {
+  margin: 20px 0 0;
+  padding: 4px 10px 4px 9px;
+}
+.container .sendotron .receivers .receivers-table .table tr {
+  cursor: pointer;
+}
+.container .sendotron .receivers .receivers-table .table tr .sender {
+  font-weight: 600;
+}
+.container .sendotron .receivers .receivers-table .table tr:hover {
+  background-color: #ffa1c0;
+}
 .container .list-group .bigger {
   font-weight: 700;
 }

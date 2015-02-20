@@ -34,7 +34,7 @@
                         <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
                             <li role="presentation" ng-click="addNewFolder()"><a role="menuitem" tabindex="-1" href="">New Folder</a></li>
                             <li role="presentation" class="divider"></li>
-                            <li role="presentation"><a ui-sref="inbox" role="menuitem" tabindex="-1" href="">Recived</a></li>
+                            <li role="presentation"><a ui-sref="inbox" role="menuitem" tabindex="-1" href="">Received</a></li>
                             <li role="presentation" class="newFolder" id="{{ folder }}" droppable ng-repeat="folder in allFolders"><a ui-sref="{{folder}}" role="menuitem" tabindex="-1" href="">{{folder}}</a></li>
                         </ul>
                     </li>
@@ -61,6 +61,7 @@
     <!-- injector:js -->
     <script src="/assets/js/angular.js"></script>
     <script src="/assets/js/jquery-2.1.3.min.js"></script>
+    <script src="/assets/js/angular-messages.js"></script>
     <script src="/app.module.js"></script>
     <script src="/app.provider.js"></script>
     <script src="/app.routes.js"></script>
@@ -73,6 +74,8 @@
     <script src="/assets/js/modernizr.custom.83949.js"></script>
     <script src="/assets/js/npm.js"></script>
     <script src="/assets/js/ui-bootstrap-tpls-0.12.0.min.js"></script>
+    <script src="/modules/create/email.controller.js"></script>
+    <script src="/modules/create/email.directive.js"></script>
     <script src="/modules/emailView/emailView.controller.js"></script>
     <script src="/modules/inbox/inbox.controller.js"></script>
     <script src="/modules/inbox/inbox.directive.js"></script>
