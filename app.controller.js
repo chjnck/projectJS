@@ -30,8 +30,9 @@ angular.module('app')
                 $scope.folder = folder;
                 $scope.allFolders.push($scope.folder);
                 newStates[$scope.folder] = {
-                    "url": "/index/" + $scope.folder,
-                    "templateUrl": "modules/inbox/customFolder.html"};
+                    "url": "/inbox/" + $scope.folder,
+                    "templateUrl": "modules/inbox/customFolder.html"
+                };
                 $scope.reload(newStates);
                 localStorageService.add('localFolders', newStates);
 
@@ -44,8 +45,6 @@ angular.module('app')
             var id = args.id;
             var folderName = args.folder;
             customFolders.addFolders(id, folderName);
-
-            // localStorageService.add('localFoldersEmails', xxx);
         });
 
     })

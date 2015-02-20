@@ -53,7 +53,7 @@ angular.module('app')
 
         $scope.removeEmail = function(id) {
             emails.deleteEmails(id).then(function(response) {
-                console.log(response);
+                console.log('delete: ' + response);
             });
             var nr = getScope(id);
             $scope.emails.splice(nr,1);

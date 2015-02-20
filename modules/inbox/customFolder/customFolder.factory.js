@@ -1,22 +1,22 @@
 angular.module('app')
-    .factory('customFolders', function () {
+    .factory('customFolders', function (localStorageService) {
         var idEmails = [];
-
         return {
             addFolders: function (id, folder) {
                 idEmails.push({
                     name: folder,
                     id: id
                 });
+                localStorageService.add('folders',idEmails);
             },
-            getFolders: function(folder) {
-                var ids = [];
+            deleteFolder: function(id, folder) {
+                idEmails = localStorageService.get('folders');
                 for(var i=0; i<idEmails.length; i++) {
-                    if (folder === idEmails[i].name) {
-                        ids.push(idEmails[i].id);
+                    if (idEmails[i].name === folder && idEmails[i].id === id){
+                        idEmails.splice(i,1);
                     }
                 }
-                return ids;
+                localStorageService.add('folders',idEmails);
             }
         }
     });
