@@ -1,0 +1,48 @@
+<div class="sendotron" ng-controller="emailCtrl">
+    <form name="formName" novalidate>
+        <fieldset class="top-label">
+            <div class="receivers">
+                <label for="title">Receivers</label>
+                <div class="receivers-table">
+                    <table class="table">
+                       <tbody name="recList" rec-list ng-model="myForm.receivers"></tbody>
+                    </table>
+                </div><br/>
+                <div class="error" ng-messages="formName.recList.$error">
+                    <div ng-message="atleastone">You need at least one receiver.</div>
+                </div>
+
+                <label for="title">New Receiver</label>
+                <input type="email" name="newReceiver" ng-model="myForm.newRec" validemail zerolength checkifexist placeholder="f.e. adam@gmail.com">
+                <div class="error" ng-messages="formName.newReceiver.$error">
+                    <div ng-message="zerolength"></div>
+                    <div ng-message="validemail">Given e-mail is invalid.</div>
+                    <div ng-message="checkifexist">This e-mail already is on your list.</div>
+                </div>
+
+                <input type="button" ng-click="myForm.addNewReceiver()" value="Add new receiver" ng-disabled="recerror"/>
+            </div>
+        </fieldset>
+
+        <fieldset class="left-label">
+            <label for="title">Title</label>
+            <input type="text" name="title" ng-model="myForm.title" ng-minlength="6" ng-maxlength="64" required>
+            <div class="error" ng-messages="formName.title.$error">
+                <div ng-message="required">Please add a title.</div>
+                <div ng-message="minlength">Your title is too short.</div>
+                <div ng-message="maxlength">Your title is too long.</div>
+            </div>
+
+            <label for="content">Content</label>
+            <textarea name="content"  ng-model="myForm.content" ng-minlength="2" ng-maxlength="1024" placeholder="Your message" cols="60" rows="6" required></textarea>
+            <div class="error" ng-messages="formName.content.$error">
+                <div ng-message="required">Please write your e-mail.</div>
+                <div ng-message="minlength">Your e-mail is too short.</div>
+                <div ng-message="maxlength">Your e-mail is too long.</div>
+            </div>
+
+
+            <input type="submit" ng-click="myForm.submitTheForm()" value="Send an e-mail" ng-disabled="error || incomplete"/>
+        </fieldset>
+    </form>
+</div>
