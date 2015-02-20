@@ -80,19 +80,19 @@ angular.module('app')
                         var idToRemove = emailToRemove.getAttribute('id');
                         scope.removeEmail(idToRemove);
                         removeEmail(emailToRemove);
+                    } else {
+                        // emails is clicked
+                        var tr = closest(event.target, 'tr');
+                        var idToSend = tr.getAttribute('id');
+                        console.log(tr);
+
+                        if(tr.classList.contains('new')){
+                            tr.classList.remove('new');
+                        }
+
+                        scope.updateStorage(idToSend);
+                        scope.showEmail(idToSend,'inbox');
                     }
-
-                    // emails is clicked
-                    var tr = closest(event.target, 'tr');
-                    var idToSend = tr.getAttribute('id');
-                    console.log(tr);
-
-                    if(tr.classList.contains('new')){
-                        tr.classList.remove('new');
-                    }
-
-                    scope.updateStorage(idToSend);
-                    scope.showEmail(idToSend);
                 });
 
                 var closest = function(elem, selector) {

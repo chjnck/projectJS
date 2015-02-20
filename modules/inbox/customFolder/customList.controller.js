@@ -1,17 +1,36 @@
 angular.module('app')
-    .controller('customList', ['$scope', '$state', 'customFolders', 'emails', 'localStorageService',
-        function ($scope, $state, customFolders, emails, localStorageService) {
+    .controller('customList', function ($scope, $rootScope, $state, customFolders, emails, localStorageService) {
 
-            var currentState = $state.current.name;
-            var getEmailsId = customFolders.getFolders(currentState);
-            var emailsList = [];
+        $scope.currentState = $state.current.name; // name of view
+        var allEmails = localStorageService.get('folders'); // get all emails from subfolders
+        var idEmails = [];
 
-            for(var i=0; i<getEmailsId.length; i++) {
-                emails.getOneEmail(getEmailsId[i]).then(function(response){
-                    $scope.emails = response;
-                    emailsList.push(response);
-                    console.log(emailsList);
-                });
+        // get id emails which belong to this subfolder
+        for(var i = 0; i<allEmails.length; i++) {
+            if ($scope.currentState === allEmails[i].name) {
+                idEmails.unshift(allEmails[i].id);
             }
+        }
 
-    }]);
+        // get emails by id from server
+        for(var j=0; j<idEmails.length; j++) {
+            emails.getOneEmail(idEmails[j]).then(function(response){
+                $scope.emailsList = response;
+                $rootScope.$broadcast('addEmailsSub',$scope.emailsList);
+            });
+        }
+
+        $scope.go = function (id) {
+            $state.go('view', {emailId: id});
+        };
+
+        $scope.showEmail = function(id) {
+            console.log('show email ' + id);
+            $scope.go(id);
+        };
+
+        $scope.removeEmail = function(id,folder) {
+            customFolders.deleteFolder(id,folder);
+        };
+
+    });
