@@ -91,7 +91,7 @@ angular.module('app')
                         }
 
                         scope.updateStorage(idToSend);
-                        scope.showEmail(idToSend,'inbox');
+                        scope.showEmail(idToSend);
                     }
                 });
 
