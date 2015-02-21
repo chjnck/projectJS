@@ -11,6 +11,9 @@ angular.module('app')
 
         if (localStorageService.isSupported) {
             $rootScope.data.theme = localStorageService.get('theme');
+            if ($rootScope.data.theme === null) {
+                $rootScope.data.theme = 'bootstrap';
+            }
         }
         else {
             $scope.theme = 'bootstrap';
